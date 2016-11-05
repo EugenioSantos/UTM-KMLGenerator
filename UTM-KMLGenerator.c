@@ -1,5 +1,10 @@
-#include "UTM-KMLGenerator.h";
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include "UTM-KMLGenerator.h"
 
 int main(){
-    printf("Hello World");
+    printf("%s","Hello World");
+    navigation_main();
 }
+
