@@ -23,4 +23,4 @@ double degree2rad(double deg);
 double rad2degree(double rad);
 
 
-#include "UTM2LatLon.c";
+#include "UTM2LatLon.c"

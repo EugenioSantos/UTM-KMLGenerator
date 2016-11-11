@@ -1,3 +1,5 @@
+
+
 void navigation_clear()
 {
 	system("cls || pause");
@@ -11,8 +13,6 @@ void navigation_error(char message[])
 
 void navigation_read_file()
 {
-    FILE * file = file_open("Informe o caminho completo do arquivo: ");
-
     int navigation_selected_item;
     int navigation_exit = 0;
 
@@ -29,6 +29,7 @@ void navigation_read_file()
         printf("Opção escolhida: ");
 
         scanf("%i", &navigation_selected_item);
+
     }
     while(!navigation_exit);
 
