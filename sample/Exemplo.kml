@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
-  <Placemark>
-    <name>De Farol a Farol</name>
-    <description>
-	Uma Poligonal Farol da Barra-Farol de Itapoan-Farol da Ponta de Humaitá
-    </description>		
-      <LinearRing>
-	  <coordinates>
-		-38.53290278,-13.01033333,0
-		-38.35365278,-12.95709722,0
-		-38.51933333333334,-12.92881111111111,0
-		-38.53290278,-13.01033333,0
-	  </coordinates>
-	</LinearRing>
-  </Placemark>
+<Placemark>
+<name>
+{name}
+</name>
+<description>
+{description}
+</description>		
+<LinearRing>
+<coordinates>
+{coordinates}
+</coordinates>
+</LinearRing>
+</Placemark>
 </kml>

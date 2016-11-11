@@ -148,13 +148,71 @@ int check_coordinate_point(UTM point)
 // Gerar Arquivo de Saída em KML
 void generate_kml_file()
 {
+    FILE *input, *output;
+    char name[140], description[140];
 
+    fflush(stdin);
+
+    printf("Nome: ");
+    scanf("%[A-Z a-z]", name);
+
+    fflush(stdin);
+
+    printf("Descrição: ");
+    scanf("%[A-Z a-z]", description);
+
+    fflush(stdin);
+
+
+	input = fopen("./sample/Exemplo.kml", "r");
+
+	if(input == NULL)
+    {
+		puts("Erro ao abrir o arquivo KML base");
+		return;
+	}
+
+	output = fopen("./output/Auto-KML.kml", "w");
+
+	char line[300];
+
+	while(fgets(line, 300, input))
+    {
+        fseek(output, 0, SEEK_END);
+
+        if(strcmp(line, "{coordinates}\n") == 0)
+        {
+        	int i;
+        	for(i = 0; i < vertices; i++)
+        	{
+        	    char new_line[300];
+        		sprintf(new_line, "%lf, %lf\n", latlon_coordinates[i].latitude, latlon_coordinates[i].longitude);
+        		fputs(new_line, output);
+        	}
+
+        }
+        else if(strcmp(line, "{name}\n") == 0)
+        {
+            fputs(name, output);
+        }
+        else if(strcmp(line, "{description}\n") == 0)
+        {
+                fputs(description, output);
+        }
+        else
+            fputs(line, output);
+    }
+
+    fclose(input);
+    fclose(output);
 }
 
 int main(){
 
    read_coordinates_file("Informe o nome do arquivo: ");
    convert_utm_coordinates_to_latlon();
+
+   generate_kml_file();
 
    printf("ZONA: %i\nVERTICES: %i\nHEMISFERIO: %c\nEST: %lf\nNOR: %lf\n", utm_coordinates[0].zona, vertices, utm_coordinates[0].letra, utm_coordinates[0].easting, utm_coordinates[0].northing);
 
