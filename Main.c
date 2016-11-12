@@ -4,7 +4,7 @@
 #include <string.h>
 #include <math.h>
 
-#include "UTM2LatLon.h"
+#include "UTM2LatLon.c"
 #include "UTM-KMLGenerator.c"
 
 int main()
