@@ -9,7 +9,7 @@ void read_coordinates_file(char prompt[]);
 void convert_utm_coordinates_to_latlon();
 double sum_polygon_area(UTM utm_coordinates[]);
 double sum_polygon_perimeter(UTM utm_coordinates[]);
-bool check_coordinate_point(UTM point);
+bool check_coordinate_point(LatLon point);
 void generate_kml_file();
 void navigation_clear();
 void navigation_error(char message[]);
@@ -89,15 +89,15 @@ double sum_polygon_perimeter(UTM utm_coordinates[])
 }
 
 // Testar se um ponto (em coordenadas geográficas) pertence a poligonal
-bool check_coordinate_point(UTM point)
+bool check_coordinate_point(LatLon point)
 {
 	int i, j = vertices-1;
     bool nodes;
 
      for (i=0; i<vertices; i++) {
-    if (utm_coordinates[i].northing<point.northing && utm_coordinates[j].northing>=point.northing
-    ||  utm_coordinates[j].northing<point.northing && utm_coordinates[i].northing>=point.northing) {
-      if (utm_coordinates[i].easting+(point.northing-utm_coordinates[i].northing)/(utm_coordinates[j].northing-utm_coordinates[i].northing)*(utm_coordinates[j].easting-utm_coordinates[i].easting)<point.easting) {
+    if (latlon_coordinates[i].longitude<point.longitude && latlon_coordinates[j].longitude>=point.longitude
+    ||  latlon_coordinates[j].longitude<point.longitude && latlon_coordinates[i].longitude>=point.longitude) {
+      if (latlon_coordinates[i].latitude+(point.longitude-latlon_coordinates[i].longitude)/(latlon_coordinates[j].longitude-latlon_coordinates[i].longitude)*(latlon_coordinates[j].latitude-latlon_coordinates[i].latitude)<point.latitude) {
         nodes=!nodes; }}
     j=i; }
 
