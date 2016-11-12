@@ -3,6 +3,7 @@
 #include <locale.h>
 #include <string.h>
 #include <math.h>
+#include <stdbool.h>
 
 #include "UTM2LatLon.c"
 #include "UTM-KMLGenerator.c"

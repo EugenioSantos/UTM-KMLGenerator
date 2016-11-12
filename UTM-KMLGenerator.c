@@ -9,7 +9,7 @@ void read_coordinates_file(char prompt[]);
 void convert_utm_coordinates_to_latlon();
 double sum_polygon_area(UTM utm_coordinates[]);
 double sum_polygon_perimeter(UTM utm_coordinates[]);
-int check_coordinate_point(UTM point);
+bool check_coordinate_point(UTM point);
 void generate_kml_file();
 void navigation_clear();
 void navigation_error(char message[]);
@@ -89,68 +89,19 @@ double sum_polygon_perimeter(UTM utm_coordinates[])
 }
 
 // Testar se um ponto (em coordenadas geográficas) pertence a poligonal
-int check_coordinate_point(UTM point)
+bool check_coordinate_point(UTM point)
 {
+	int i, j = vertices-1;
+    bool nodes;
 
-	int i, intersecoes = 0;
+     for (i=0; i<vertices; i++) {
+    if (utm_coordinates[i].northing<ponto.northing && utm_coordinates[j].northing>=ponto.northing
+    ||  utm_coordinates[j].northing<ponto.northing && utm_coordinates[i].northing>=ponto.northing) {
+      if (utm_coordinates[i].easting+(ponto.northing-utm_coordinates[i].northing)/(utm_coordinates[j].northing-utm_coordinates[i].northing)*(utm_coordinates[j].easting-utm_coordinates[i].easting)<ponto.easting) {
+        nodes=!nodes; }}
+    j=i; }
 
-	for(i = 0; i < vertices-1; i++)
-	{
-		UTM p1, p2, temp;
-
-		p1 = utm_coordinates[i];
-		p2 = utm_coordinates[i+1];
-
-		if(p1.easting > p2.easting)
-		{
-			temp = p1;
-			p1 = p2;
-			p2 = temp;
-		}
-
-		double northingMin, northingMax;
-
-		if(p1.northing < p2.northing)
-		{
-			northingMin = p1.northing;
-			northingMax = p2.northing;
-		}
-		else
-		{
-			northingMin = p2.northing;
-			northingMax = p1.northing;
-		}
-
-		if(point.northing > northingMin && point.northing < northingMax)
-		{
-			if(point.easting > p2.easting)
-			{
-				intersecoes++;
-			}
-			else
-			{
-				if(point.easting > p1.easting)
-				{
-					double tanalfa1, tanalfa2, alfa1, alfa2;
-
-					tanalfa1 = (p1.northing - point.northing) / (p1.easting - point.easting);
-					tanalfa2 = (p1.northing - p2.northing) / (p1.easting - p2.easting);
-
-					alfa1 = atan(tanalfa1);
-					alfa2 = atan(tanalfa2);
-
-					printf("a1 = %lf a2 = %lf", alfa1, alfa2);
-
-					if(alfa1 < alfa2)
-						intersecoes++;
-				}
-			}
-		}
-	}
-
-	printf("inter = %i", intersecoes);
-
-	return ((intersecoes % 2) == 0);
+  return nodes;
 }
 
 // Gerar Arquivo de Saída em KML
