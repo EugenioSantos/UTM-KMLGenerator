@@ -1,16 +1,24 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <locale.h>
-#include "UTM2LatLon.h"
-#include <string.h>
-#include <math.h>
-
 int zona;
 char hemisferio;
 int vertices;
 
 UTM *utm_coordinates;
 LatLon *latlon_coordinates;
+
+void read_coordinates_file(char prompt[]);
+void convert_utm_coordinates_to_latlon();
+double sum_polygon_area(UTM utm_coordinates[]);
+double sum_polygon_perimeter(UTM utm_coordinates[]);
+int check_coordinate_point(UTM point);
+void generate_kml_file();
+void navigation_clear();
+void navigation_error(char message[]);
+void navigation_read_file();
+int navigation_console_exit();
+
+void navigation_sum_polygon_area();
+void navigation_sum_polygon_perimeter();
+void navigation_check_coordinate_point();
 
 // Ler arquivo com dados da poligonal
 void read_coordinates_file(char prompt[])
@@ -207,15 +215,5 @@ void generate_kml_file()
     fclose(output);
 }
 
-int main(){
 
-   read_coordinates_file("Informe o nome do arquivo: ");
-   convert_utm_coordinates_to_latlon();
-
-   generate_kml_file();
-
-   printf("ZONA: %i\nVERTICES: %i\nHEMISFERIO: %c\nEST: %lf\nNOR: %lf\n", utm_coordinates[0].zona, vertices, utm_coordinates[0].letra, utm_coordinates[0].easting, utm_coordinates[0].northing);
-
-    system("PAUSE");
-}
 
