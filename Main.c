@@ -111,15 +111,15 @@ void navigation_sum_polygon_perimeter()
 
 void navigation_check_coordinate_point()
 {
-    UTM utm_entry;
+    LatLon point;
 
     printf("[Northing]: ");
-    scanf("%lf", &utm_entry.northing);
+    scanf("%lf", &point.latitude);
 
     printf("[Easting]: ");
-    scanf("%lf", &utm_entry.easting);
+    scanf("%lf", &point.longitude);
 
-    if(check_coordinate_point(utm_entry)) {
+    if(check_coordinate_point(point)) {
         puts("O ponto pertence a poligonal");
     }
     else {
