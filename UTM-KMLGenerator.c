@@ -95,9 +95,9 @@ bool check_coordinate_point(UTM point)
     bool nodes;
 
      for (i=0; i<vertices; i++) {
-    if (utm_coordinates[i].northing<ponto.northing && utm_coordinates[j].northing>=ponto.northing
-    ||  utm_coordinates[j].northing<ponto.northing && utm_coordinates[i].northing>=ponto.northing) {
-      if (utm_coordinates[i].easting+(ponto.northing-utm_coordinates[i].northing)/(utm_coordinates[j].northing-utm_coordinates[i].northing)*(utm_coordinates[j].easting-utm_coordinates[i].easting)<ponto.easting) {
+    if (utm_coordinates[i].northing<point.northing && utm_coordinates[j].northing>=point.northing
+    ||  utm_coordinates[j].northing<point.northing && utm_coordinates[i].northing>=point.northing) {
+      if (utm_coordinates[i].easting+(point.northing-utm_coordinates[i].northing)/(utm_coordinates[j].northing-utm_coordinates[i].northing)*(utm_coordinates[j].easting-utm_coordinates[i].easting)<point.easting) {
         nodes=!nodes; }}
     j=i; }
 
